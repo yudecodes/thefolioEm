@@ -1,0 +1,403 @@
+:root {
+  /* Sage Green and Cream Palette */
+  --cream: #f5f5dc;
+  --cream-dark: #e8e4d9;
+  --sage-light: #c1d6c1;
+  --sage: #9caf88;
+  --sage-dark: #7a8f6b;
+  --sage-darker: #5c6b52;
+  
+  /* Semantic mappings */
+  --bg-primary: var(--cream);
+  --bg-secondary: var(--cream-dark);
+  --bg-card: #ffffff;
+  --text-primary: #3d4a35;
+  --text-secondary: #6b7a5f;
+  --accent: var(--sage);
+  --accent-soft: var(--sage-light);
+  --border: #d4d9cf;
+  --shadow: rgba(92, 107, 82, 0.08);
+  --error: #c98b7a;
+  --success: #8faa8f;
+  
+  /* Dark mode - deeper sage tones */
+  --dark-bg: #2d3828;
+  --dark-bg-secondary: #3d4a35;
+  --dark-card: #4a5a42;
+  --dark-text: #f0f0e8;
+  --dark-text-secondary: #c1d6c1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--sage-darker);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: var(--sage-light);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+body.dark-mode p {
+  color: var(--dark-text-secondary);
+}
+
+/* Layout */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page {
+  min-height: calc(100vh - 200px);
+  padding: 3rem 1rem;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 12px var(--shadow);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .card {
+  background: var(--dark-card);
+  border-color: var(--dark-bg-secondary);
+}
+
+/* Buttons */
+button {
+  background: var(--sage);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: var(--sage-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(92, 107, 82, 0.2);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form Elements */
+input, textarea, select {
+  width: 100%;
+  padding: 0.875rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-card);
+  color: var(--dark-text);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.15);
+}
+
+/* Links */
+a {
+  color: var(--sage-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--sage-darker);
+}
+
+body.dark-mode a {
+  color: var(--sage-light);
+}
+
+body.dark-mode a:hover {
+  color: var(--cream);
+}
+
+/* Error messages */
+.error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--sage-light);
+  border-radius: 26px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: var(--sage);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Navigation specific */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--sage);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Hero section */
+.hero {
+  background: linear-gradient(135deg, var(--cream-dark) 0%, var(--sage-light) 100%);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  border: 1px solid var(--border);
+}
+
+body.dark-mode .hero {
+  background: linear-gradient(135deg, var(--dark-bg-secondary) 0%, var(--sage-darker) 100%);
+}
+
+/* Quiz specific styles */
+.quiz-option {
+  background: var(--cream-dark);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  border-color: var(--sage-light);
+  background: var(--cream);
+}
+
+.quiz-option.selected {
+  background: var(--sage-light);
+  border-color: var(--sage);
+  color: var(--sage-darker);
+}
+
+body.dark-mode .quiz-option {
+  background: var(--dark-bg-secondary);
+}
+
+body.dark-mode .quiz-option:hover {
+  border-color: var(--sage);
+}
+
+body.dark-mode .quiz-option.selected {
+  background: var(--sage-darker);
+  border-color: var(--sage);
+  color: var(--cream);
+}
+
+/* Flex items for climate actions */
+.action-pill {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--sage-light);
+  color: var(--sage-darker);
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.25rem;
+}
+
+body.dark-mode .action-pill {
+  background: var(--sage-darker);
+  color: var(--cream);
+}
+
+/* Blockquote styling */
+blockquote {
+  border-left: 4px solid var(--sage);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+body.dark-mode blockquote {
+  border-left-color: var(--sage-light);
+  color: var(--dark-text-secondary);
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid var(--sage-light);
+  color: var(--sage-darker);
+  font-weight: 600;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark-mode th {
+  color: var(--sage-light);
+  border-bottom-color: var(--sage-dark);
+}
+
+body.dark-mode td {
+  color: var(--dark-text-secondary);
+  border-bottom-color: var(--dark-bg-secondary);
+}
+
+tr:hover td {
+  background: var(--cream-dark);
+}
+
+body.dark-mode tr:hover td {
+  background: var(--dark-bg-secondary);
+}
+
+/* Fieldset */
+fieldset {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+body.dark-mode fieldset {
+  border-color: var(--dark-card);
+}
+
+legend {
+  color: var(--sage-darker);
+  font-weight: 500;
+  padding: 0 0.75rem;
+}
+
+body.dark-mode legend {
+  color: var(--sage-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+}
