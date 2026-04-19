@@ -53,13 +53,13 @@ const userSchema = new mongoose.Schema(
 
 // ── Pre-save hook: hash password before storing ────────────────
 // This runs automatically every time you call user.save()
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (!this.isModified('password')) {
-    return next(); // skip if password unchanged
+    return; // skip password hash if unchanged
   }
 
-  this.password = await bcrypt.hash(this.password, 12);
-  next();
+  const saltRounds = 12;
+  this.password = await bcrypt.hash(this.password, saltRounds);
 });
 
 // ── Instance method: compare entered password with stored hash ─
