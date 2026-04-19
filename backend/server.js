@@ -15,7 +15,7 @@ const app = express();
 connectDB(); // Connect to MongoDB
 // ── Middleware ─────────────────────────────────────────────────
 // Allow requests from any origin (adjust for production)
-app.use(cors({ origin: ['http://localhost:3000', 'https://thefolio-em-t1op.vercel.app'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:3000', 'https://thefolio-em.vercel.app'], credentials: true }));
 // Parse incoming JSON request bodies
 app.use(express.json());
 // Serve uploaded image files as public URLs
